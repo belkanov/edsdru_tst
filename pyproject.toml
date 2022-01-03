@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "edsdru_tst"
+version = "0.1.0"
+description = ""
+authors = ["belkanov <78809180+belkanov@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.0"
+django-environ = "^0.8.1"
+gunicorn = "^20.1.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

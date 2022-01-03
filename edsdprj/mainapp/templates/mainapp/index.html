@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main</title>
+</head>
+<body>
+(это просто для наглядности)<br>
+USER : {{ user }}<br>
+SESSION: {{ request.session.session_key }}<br>
+<hr>
+<form method="post">
+  {% csrf_token %}
+  <input name="guess" type="submit" value="Загадал">
+</form>
+<br>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input name="answer" type="submit" value="Ответ">
+</form>
+<hr>
+<table border="1">
+  <thead>
+  <tr>
+    <td rowspan="2">Загаданное число</td>
+    {% for m_id in mediums_ids %}
+      <td colspan="2">
+        экстрасенс<br>
+        {{ m_id }}
+      </td>
+    {% endfor %}
+  </tr>
+  <tr>
+    {% for m_id in mediums_ids %}
+      <td>ответ</td>
+      <td>точность</td>
+    {% endfor %}
+  </tr>
+  </thead>
+  <tbody>
+  {% for row in table_data %}
+    <tr>
+      <td>{{ row.0 }}</td>
+      {% for medium_data in row.1 %}
+        <td>{{ medium_data.0 }}</td>
+        <td>{{ medium_data.1 }}</td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{#{{ mediums }}#}
+{#<br>#}
+{#<br>#}
+{#{{ mediums.0}}#}
+{#<br>#}
+{#<br>#}
+{#{{ mediums.0.get_options}}#}
+{#<br>#}
+{#<br>#}
+{#{{ mediums.0.get_options.history}}#}
+{#<br>#}
+{#<br>#}
+{#{{ mediums.0.get_options.history.0}}#}
+{#<br>#}
+{#<br>#}
+</body>
+</html>
