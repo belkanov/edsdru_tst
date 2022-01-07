@@ -1,0 +1,47 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+
+  {% if 'user_answer' in form.changed_data %}
+    <a href="{% url 'index' %}">На главную</a>
+  {% else %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input name="answer" type="submit" value="Дать ответ">
+    </form>
+  {% endif %}
+
+  <hr>
+  <table border="1">
+    <thead>
+    <tr>
+      <td rowspan="2">Загаданное число</td>
+      {% for m_id in mediums_ids %}
+        <td colspan="2">
+          экстрасенс<br>
+          {{ m_id }}
+        </td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for m_id in mediums_ids %}
+        <td>ответ</td>
+        <td>достоверность</td>
+      {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in table_data %}
+      <tr>
+        <td>{{ row.0 }}</td>
+        {% for medium_data in row.1 %}
+          <td>{{ medium_data.0 }}</td>
+          <td>{{ medium_data.1 }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
